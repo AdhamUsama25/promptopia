@@ -1,14 +1,21 @@
-import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-
-
-const handler = NextAuth({
-    providers:[
-        GoogleProvider({
-            clientId:'',
-            clientSecret:''
-        })
-    ],
-    async session({session}){},
-    async signIn({profile}){}
-})
+import NextAuth from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
+console.log(process.env.GOOGLE_ID);
+console.log(process.env.GOOGLE_CLIENT_SECRET);
+export default NextAuth({
+  providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID || '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+    }),
+  ],
+  async session({session}){},
+  async signIn({profile}){
+    try {
+      connectToDB()
+    } catch (error) {
+      
+    }
+  }
+  
+});
