@@ -1,11 +1,12 @@
 import GoogleProvider from "next-auth/providers/google";
 import User from "@models/user";
-import  NextAuth,{
-  Session,
-  User as NextAuthUser,
-  Profile,
-} from "next-auth";
+import NextAuth, { Session, User as NextAuthUser, Profile } from "next-auth";
 
+interface GoogleProfile extends Profile {
+  email?: string;
+  name?: string;
+  picture?: string;
+}
 declare module "next-auth" {
   interface Session {
     user?: NextAuthUser & { id?: string };
@@ -14,7 +15,7 @@ declare module "next-auth" {
 
 import { connectToDB } from "@utils/database";
 
-const handler = NextAuth( {
+const handler = NextAuth({
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID || "",
@@ -33,13 +34,7 @@ const handler = NextAuth( {
       }
       return session;
     },
-    async signIn({
-      profile,
-    }: {
-      user: NextAuthUser;
-      account: any;
-      profile?: Profile;
-    }) {
+    async signIn({ profile }: { profile?: GoogleProfile }) {
       try {
         await connectToDB();
 
@@ -49,7 +44,7 @@ const handler = NextAuth( {
           await User.create({
             email: profile?.email,
             username: profile?.name?.replace(" ", "").toLowerCase(),
-            image: profile?.image ?? "",
+            image: profile?.picture ?? "",
           });
         }
         return true;

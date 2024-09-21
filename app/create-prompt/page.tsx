@@ -1,6 +1,6 @@
 "use client";
 import Form from "@components/Form";
-import { IPost } from "@Types/prompt.types";
+import { ICreatePost, IUpdatePost } from "@Types/prompt.types";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -10,10 +10,10 @@ const CreatePrompt = () => {
   const { data: session } = useSession();
 
   const [submitting, setSubmitting] = useState(false);
-  const [post, setPost] = useState<IPost>({
+  const [post, setPost] = useState<ICreatePost | IUpdatePost>({
     prompt: "",
     tag: "",
-  });
+  } as ICreatePost);
 
   const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

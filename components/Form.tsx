@@ -1,10 +1,10 @@
-import { type IPost } from "@Types/prompt.types";
+import { ICreatePost, IUpdatePost, type IPost } from "@Types/prompt.types";
 import Link from "next/link";
 import React from "react";
 interface IFormProps {
-  type: "Create" | "Update";
-  post: IPost;
-  setPost: React.Dispatch<React.SetStateAction<IPost>>;
+  type: "Create" | "Edit";
+  post: ICreatePost | IUpdatePost;
+  setPost: React.Dispatch<React.SetStateAction<ICreatePost | IUpdatePost>>;
   submitting: boolean;
   handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
@@ -46,7 +46,7 @@ const Form = ({
           <span className="font-satoshi font-semibold text-base text-gray-700">
             Tag{" "}
             <span className="font-normal text-gray-400">
-              (#product, #webdevelopment, #idea)
+              (product, webdevelopment, idea)
             </span>
           </span>
         </label>

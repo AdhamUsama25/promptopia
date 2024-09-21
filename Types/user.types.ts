@@ -1,5 +1,6 @@
-export interface IProfile {
-    email: string;
-    name: string;
-    picture: string;
+export interface IUser {
+  _id: string;
+  email: string;
+  username: string;
+  image?: string;
 }
