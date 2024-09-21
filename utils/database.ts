@@ -1,12 +1,11 @@
-import { connectToDB } from '@utils/database';
 import mongoose from "mongoose";
 
-let isConected = false;
+let isConnected = false;
 export const connectToDB = async () => {
 
     mongoose.set("strictQuery",true);
 
-    if(isConected){
+    if(isConnected){
         console.log("MongoDB is already connected");
         return;
     }
@@ -16,9 +15,10 @@ export const connectToDB = async () => {
             dbName: "share_prompt",
         });
 
-        isConected = true;
+        isConnected = true;
         console.log("MongoDB is connected");
     } catch (error) {
         console.log("MongoDB connection error", error);
     }
 };
+
