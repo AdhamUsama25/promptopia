@@ -4,8 +4,12 @@ import "@styles/globals.css";
 import { ReactNode } from "react";
 
 export const metadata = {
-  title: "Promptobia",
-  describetion: "Discover & Share AI Prombts",
+  title: "Promptopia",
+  description: "Discover & Share AI Prompts",
+  icons: {
+    icon: "/assets/images/logo.svg",
+    appleIcon: "/assets/images/logo.svg",
+  },
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
