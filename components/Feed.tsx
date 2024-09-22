@@ -50,17 +50,26 @@ const Feed = () => {
   }, []);
 
   const handleTagClick = (tag: string) => {
-    setSearchQuery(tag);
+    setSearchQuery("#" + tag);
   };
 
   const filteredPosts = posts.filter((post) => {
-    
-    const filteredByTags = post.tags?.includes(searchQuery);
-    const filteredByPrompt = post.prompt?.includes(searchQuery);
-    const filteredByCreator = post.creator?.username?.includes(searchQuery);
+    const modifiedSearchQuery = searchQuery.toLowerCase().trim();
+
+    const filteredByTags = post.tags
+      ?.toLowerCase()
+      .includes(modifiedSearchQuery.replace("#", ""));
+
+    const filteredByPrompt = post.prompt
+      ?.toLowerCase()
+      .includes(modifiedSearchQuery);
+
+    const filteredByCreator = post.creator?.username
+      ?.toLowerCase()
+      .includes(modifiedSearchQuery);
+      
     return filteredByTags || filteredByPrompt || filteredByCreator;
   });
-
   return (
     <section className="feed">
       <form className="relative w-full flex-center ">
