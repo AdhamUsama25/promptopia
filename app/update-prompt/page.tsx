@@ -4,7 +4,7 @@ import { type IUpdatePost } from "@Types/prompt.types";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 
-const EditPrompt = () => {
+const EditPromptContent = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
@@ -52,16 +52,22 @@ const EditPrompt = () => {
   };
 
   return (
-    <Suspense>
-      <div>
-        <Form
-          type="Edit"
-          post={post}
-          setPost={setPost}
-          submitting={submitting}
-          handleSubmit={updatePrompt}
-        />
-      </div>
+    <div>
+      <Form
+        type="Edit"
+        post={post}
+        setPost={setPost}
+        submitting={submitting}
+        handleSubmit={updatePrompt}
+      />
+    </div>
+  );
+};
+
+const EditPrompt = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EditPromptContent />
     </Suspense>
   );
 };
