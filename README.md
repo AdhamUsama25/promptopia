@@ -45,7 +45,7 @@ To get started with the project, follow these steps:
   4. Open your browser and navigate to http://localhost:3000 to see the app in action. 👀
 
 # Live Demo 🌍
-Check out the live deployment here: [Promptopia](https://promptopia-alpha-ten.vercel.app/) 🌐
+Check out the live deployment here: [Promptopia](https://promptopia-eta-kohl.vercel.app/) 🌐
 
 # Development 💻
 You can start editing the page by modifying app/page.tsx. The page will automatically update as you save changes.
