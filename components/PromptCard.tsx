@@ -3,11 +3,11 @@
 import { IPost } from "@Types/prompt.types";
 import React, { useState } from "react";
 import Image from "next/image";
-import logo from "../public/assets/images/logo.svg";
+import avatar from "../public/assets/images/user-avatar.png";
 import copyIcon from "../public/assets/icons/copy.svg";
 import copiedIcon from "../public/assets/icons/tick.svg";
 import { useSession } from "next-auth/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 interface PromptCardProps {
   post: IPost;
   handleTagClick?: (tag: string) => void;
@@ -21,6 +21,8 @@ const PromptCard = ({
   handleEdit,
   handleDelete,
 }: PromptCardProps) => {
+  const router = useRouter();
+
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();
@@ -37,17 +39,20 @@ const PromptCard = ({
       <div className="flex justify-between items-start gap-5">
         <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
           <Image
-            src={post.creator.image ?? logo}
+            src={post.creator.image ? post.creator.image : avatar}
             alt={post.creator.username}
             width={40}
             height={40}
             className="rounded-full"
           />
-          <div className="flex flex-col">
+          <div
+            className="flex flex-col cursor-pointer"
+            onClick={() => router.push(`profile/${post.creator.username}`)}
+          >
             <h3 className="font-satoshi font-semibold text-gray-900">
               {post.creator.username}
             </h3>
-            <p className="font-inter text-sm text-gray-500">
+            <p className="font-inter text-sm text-gray-500  hover:underline">
               {post.creator.email}
             </p>
           </div>
