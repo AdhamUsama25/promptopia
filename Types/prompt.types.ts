@@ -4,8 +4,8 @@ export interface IPost {
   _id: string;
   prompt: string;
   creator: IUser;
-  tag: string;
+  tags: string;
 }
 
-export interface ICreatePost extends Omit<IPost, "_id" | "creator"> {}
-export interface IUpdatePost extends Partial<Omit<IPost, "creator">> {}
+export type ICreatePost = Omit<IPost, "_id" | "creator">;
+export type IUpdatePost = Partial<Omit<IPost, "creator">>;

@@ -24,7 +24,7 @@ export const PATCH = async (
   req: Request,
   { params }: { params: { id: string } }
 ) => {
-  const { prompt, tag } = await req.json();
+  const { prompt, tags } = await req.json();
   try {
     await connectToDB();
     const existingPrompt = await Prompt.findById(params.id);
@@ -36,7 +36,7 @@ export const PATCH = async (
     }
 
     existingPrompt.prompt = prompt;
-    existingPrompt.tag = tag;
+    existingPrompt.tags = tags;
     await existingPrompt.save();
 
     return new Response(JSON.stringify(existingPrompt), {

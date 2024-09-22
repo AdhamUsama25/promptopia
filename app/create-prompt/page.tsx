@@ -12,7 +12,7 @@ const CreatePrompt = () => {
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState<ICreatePost | IUpdatePost>({
     prompt: "",
-    tag: "",
+    tags: "",
   } as ICreatePost);
 
   const createPrompt = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,7 +24,7 @@ const CreatePrompt = () => {
         body: JSON.stringify({
           prompt: post.prompt,
           userId: session?.user?.id,
-          tag: post.tag,
+          tags: post.tags,
         }),
       });
 

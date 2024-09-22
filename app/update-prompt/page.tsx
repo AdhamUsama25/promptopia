@@ -1,7 +1,6 @@
 "use client";
 import Form from "@components/Form";
 import { type IUpdatePost } from "@Types/prompt.types";
-import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -12,7 +11,7 @@ const EditPrompt = () => {
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState<IUpdatePost>({
     prompt: "",
-    tag: "",
+    tags: "",
   });
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const EditPrompt = () => {
         method: "PATCH",
         body: JSON.stringify({
           prompt: post.prompt,
-          tag: post.tag,
+          tags: post.tags,
         }),
       });
 

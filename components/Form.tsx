@@ -1,4 +1,4 @@
-import { ICreatePost, IUpdatePost, type IPost } from "@Types/prompt.types";
+import { ICreatePost, IUpdatePost } from "@Types/prompt.types";
 import Link from "next/link";
 import React from "react";
 interface IFormProps {
@@ -44,18 +44,18 @@ const Form = ({
 
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Tag{" "}
+            Tags{" "}
             <span className="font-normal text-gray-400">
-              (product, webdevelopment, idea)
+              (space separated with no hash signs or commas)
             </span>
           </span>
         </label>
 
         <input
-          value={post.tag}
-          onChange={(e) => setPost({ ...post, tag: e.target.value })}
+          value={post.tags}
+          onChange={(e) => setPost({ ...post, tags: e.target.value })}
           type="text"
-          placeholder="#tag"
+          placeholder="eg: product  webdevelopment idea"
           required
           className="form_input"
         />

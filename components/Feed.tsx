@@ -9,7 +9,10 @@ interface PromptCardListProps {
   handleTagClick: (tag: string) => void;
 }
 
-export const PromptCardList = ({ data, handleTagClick }: PromptCardListProps) => {
+export const PromptCardList = ({
+  data,
+  handleTagClick,
+}: PromptCardListProps) => {
   return (
     <div className="mt-16 prompt_layout">
       {data.map((post) => (
@@ -46,12 +49,24 @@ const Feed = () => {
     fetchPosts();
   }, []);
 
+  const handleTagClick = (tag: string) => {
+    setSearchQuery(tag);
+  };
+
+  const filteredPosts = posts.filter((post) => {
+    
+    const filteredByTags = post.tags?.includes(searchQuery);
+    const filteredByPrompt = post.prompt?.includes(searchQuery);
+    const filteredByCreator = post.creator?.username?.includes(searchQuery);
+    return filteredByTags || filteredByPrompt || filteredByCreator;
+  });
+
   return (
     <section className="feed">
       <form className="relative w-full flex-center ">
         <input
           type="text"
-          placeholder="Search for a tag, or a username"
+          placeholder="Search for a prompt, tag, or a username"
           value={searchQuery}
           onChange={handleSearchQueryChange}
           required
@@ -59,7 +74,7 @@ const Feed = () => {
         />
       </form>
 
-      <PromptCardList data={posts} handleTagClick={() => {}} />
+      <PromptCardList data={filteredPosts} handleTagClick={handleTagClick} />
     </section>
   );
 };

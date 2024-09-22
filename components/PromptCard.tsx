@@ -7,7 +7,7 @@ import logo from "../public/assets/images/logo.svg";
 import copyIcon from "../public/assets/icons/copy.svg";
 import copiedIcon from "../public/assets/icons/tick.svg";
 import { useSession } from "next-auth/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 interface PromptCardProps {
   post: IPost;
   handleTagClick?: (tag: string) => void;
@@ -24,7 +24,6 @@ const PromptCard = ({
   const [copied, setCopied] = useState("");
   const { data: session } = useSession();
   const pathName = usePathname();
-  const router = useRouter();
 
   const handleCopyPrompt = () => {
     navigator.clipboard.writeText(post.prompt);
@@ -64,12 +63,15 @@ const PromptCard = ({
         </div>
       </div>
       <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
-      <p
-        className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(post.tag)}
-      >
-        #{post.tag}
-      </p>
+      <div className="flex gap-1">
+        {post.tags.split(" ").map((tag, idx) => (
+          <p
+            className="font-inter text-sm blue_gradient cursor-pointer"
+            onClick={() => handleTagClick && handleTagClick(tag)}
+            key={idx}
+          >{`#${tag}`}</p>
+        ))}
+      </div>
 
       {session?.user?.id === post.creator._id && pathName === "/profile" && (
         <div className="flex gap-4 mt-5 border-t border-gray-100 pt-3">
