@@ -1,11 +1,13 @@
 "use client";
 import Form from "@components/Form";
 import { type IUpdatePost } from "@Types/prompt.types";
+import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { Suspense, useEffect, useState } from "react";
 
 const EditPromptContent = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const searchParams = useSearchParams();
   const promptId = searchParams.get("id");
   const [submitting, setSubmitting] = useState(false);
@@ -13,6 +15,10 @@ const EditPromptContent = () => {
     prompt: "",
     tags: "",
   });
+
+  useEffect(() => {
+    if(!session) router.push("/");
+  }, [router, session]);
 
   useEffect(() => {
     const getPromptDetails = async () => {

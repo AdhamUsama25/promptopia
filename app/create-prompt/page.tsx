@@ -3,11 +3,15 @@ import Form from "@components/Form";
 import { ICreatePost, IUpdatePost } from "@Types/prompt.types";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const CreatePrompt = () => {
   const router = useRouter();
   const { data: session } = useSession();
+
+  useEffect(() => {
+    if(!session) router.push("/");
+  }, [router, session]);
 
   const [submitting, setSubmitting] = useState(false);
   const [post, setPost] = useState<ICreatePost | IUpdatePost>({
