@@ -42,7 +42,7 @@ const EditPrompt = () => {
       });
 
       if (res.ok) {
-        router.push(`/posts/${promptId}`);
+        router.push("/profile");
       }
     } catch (error) {
       console.log(error);
