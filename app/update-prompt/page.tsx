@@ -2,7 +2,7 @@
 import Form from "@components/Form";
 import { type IUpdatePost } from "@Types/prompt.types";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 
 const EditPrompt = () => {
   const router = useRouter();
@@ -52,15 +52,17 @@ const EditPrompt = () => {
   };
 
   return (
-    <div>
-      <Form
-        type="Edit"
-        post={post}
-        setPost={setPost}
-        submitting={submitting}
-        handleSubmit={updatePrompt}
-      />
-    </div>
+    <Suspense>
+      <div>
+        <Form
+          type="Edit"
+          post={post}
+          setPost={setPost}
+          submitting={submitting}
+          handleSubmit={updatePrompt}
+        />
+      </div>
+    </Suspense>
   );
 };
 
