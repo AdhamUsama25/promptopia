@@ -140,12 +140,16 @@ const Nav = () => {
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
+                  title="Sign In with Google"
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
-                  Sign In
+                  Sign in with
+                  <span className="ml-1">
+                    <Image src={googleIcon} alt={""} height={18} width={18} />
+                  </span>
                 </button>
               ))}
           </>
